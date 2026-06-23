@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>신청 완료</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(to bottom,#dff6ff,#ffffff);
+text-align:center;
+padding:50px 20px;
+}
+
+.card{
+max-width:600px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:25px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+h1{
+color:#2b7de9;
+margin-bottom:20px;
+}
+
+.status{
+font-size:22px;
+font-weight:bold;
+color:#4da6ff;
+margin:20px 0;
+}
+
+.home-btn{
+display:inline-block;
+margin-top:20px;
+padding:15px 25px;
+background:#4da6ff;
+color:white;
+text-decoration:none;
+border-radius:15px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>💌 신청이 정상적으로 접수되었습니다</h1>
+
+<p>
+데이트 신청이 성공적으로 완료되었습니다.
+</p>
+
+<div class="status">
+📋 현재 상태 : 검토중
+</div>
+
+<p>
+담당자 : 용원 ❤️
+</p>
+
+<p id="dplus"></p>
+
+<a href="index.html" class="home-btn">
+🏠 홈으로 돌아가기
+</a>
+
+</div>
+
+<script>
+
+const startDate = new Date("2026-04-13");
+const today = new Date();
+
+const diff =
+Math.floor(
+(today-startDate)/(1000*60*60*24)
+)+1;
+
+document.getElementById("dplus").innerHTML =
+"❤️ 우리 만난 지 D+" + diff;
+
+</script>
+
+</body>
+</html>

@@ -138,37 +138,57 @@
 
     <div class="form-title">데이트 신청서 작성 구역</div>
     
-    <form action="https://formspree.io/f/xjgqkrjr" method="POST">
-        
-        <div class="form-group">
-            <label for="name">👤 이름</label>
-            <input type="text" id="name" name="이름" placeholder="이름을 적어줘!" required>
-        </div>
+<form id="dateForm">
+    <div class="form-group">
+        <label for="name">👤 이름</label>
+        <input type="text" id="name" name="이름" placeholder="이름을 적어줘!" required>
+    </div>
+    <div class="form-group">
+        <label for="relationship">💕 관계</label>
+        <input type="text" id="relationship" name="관계" placeholder="예: 세상에서 제일 예쁜 여자친구" required>
+    </div>
+    <div class="form-group">
+        <label for="date">📅 희망 날짜</label>
+        <input type="date" id="date" name="희망날짜" required>
+    </div>
+    <div class="form-group">
+        <label for="date-plan">🍕 하고 싶은 데이트</label>
+        <textarea id="date-plan" name="하고싶은데이트" placeholder="먹고 싶은 음식이나 가고 싶은 곳을 편하게 적어줘!" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="extra-request">✨ 추가 요청 사항</label>
+        <textarea id="extra-request" name="추가요청사항" placeholder="영원이한테 바라는 점이나 하고 싶은 말 (선택)"></textarea>
+    </div>
 
-        <div class="form-group">
-            <label for="relationship">💕 관계</label>
-            <input type="text" id="relationship" name="관계" placeholder="예: 세상에서 제일 예쁜 여자친구" required>
-        </div>
+    <button type="submit" class="submit-btn">💙 데이트 신청하기</button>
+</form>
 
-        <div class="form-group">
-            <label for="date">📅 희망 날짜</label>
-            <input type="date" id="date" name="희망날짜" required>
-        </div>
-
-        <div class="form-group">
-            <label for="date-plan">🍕 하고 싶은 데이트</label>
-            <textarea id="date-plan" name="하고싶은데이트" placeholder="먹고 싶은 음식이나 가고 싶은 곳을 편하게 적어줘!" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="extra-request">✨ 추가 요청 사항</label>
-            <textarea id="extra-request" name="추가요청사항" placeholder="용원이한테 바라는 점이나 하고 싶은 말 (선택)"></textarea>
-        </div>
-
-        <input type="hidden" name="_next" value="https://Yongwon.github.io/date-site11/success.html">
-
-        <button type="submit" class="submit-btn">💙 데이트 신청하기</button>
-    </form>
+<script>
+// 💡 기존 <script> 태그 안에 이 로직을 추가하거나 하단에 배치해 주세요.
+document.getElementById('dateForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // 기본 제출 막기
+    
+    const formData = new FormData(this);
+    
+    // ⚠️ 여기에 영원님의 Formspree 고유 ID 주소를 넣어주세요!
+    fetch('https://formspree.io/f/여기에_고유_ID_입력', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+        if (response.ok) {
+            // 메일 전송 성공 시 무조건 success.html로 강제 이동!
+            window.location.href = 'success.html'; 
+        } else {
+            alert('신청 중 오류가 발생했어요. 다시 시도해줘!');
+        }
+    })
+    .catch(error => {
+        alert('네트워크 오류가 발생했어요!');
+    });
+});
+</script>
 </div>
 
 <footer>

@@ -1,1 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 데이트 신청서</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #dff6ff, #ffffff);
+            text-align: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+            color: #333;
+        }
+        header { padding: 30px 20px 10px; }
+        h1 { color: #2b7de9; margin-bottom: 5px; font-size: 24px; }
+        
+        .card {
+            width: 90%;
+            max-width: 450px;
+            margin: 20px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 6px 20px rgba(0,0,0,.08);
+        }
 
+        /* 1. 사진 */
+        .photo-box { margin-bottom: 20px; }
+        .photo {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0,0,0,.1);
+        }
+
+        /* 2. D+ 카운터 */
+        .dplus {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2b7de9;
+            margin-bottom: 20px;
+        }
+
+        /* 3. 우리의 노래 */
+        .music-section { margin-bottom: 25px; }
+        .music-btn {
+            background: #87ceeb;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+            width: 100%;
+        }
+        .music-btn:hover { transform: scale(1.03); }
+        .player-box { display: none; margin-top: 15px; }
+
+        /* 4. 데이트 신청 폼 */
+        .form-title {
+            font-size: 18px;
+            color: #2b7de9;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 2px solid #dff6ff;
+            padding-bottom: 5px;
+        }
+        .form-group { text-align: left; margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #4da6ff;
+            box-shadow: 0 0 8px rgba(77, 166, 255, 0.15);
+        }
+        .form-group textarea { resize: none; height: 80px; }
+
+        .submit-btn {
+            background: #4da6ff;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .submit-btn:hover { transform: scale(1.03); }
+
+        footer { margin-top: 20px; padding-bottom: 20px; color: #999; font-size: 13px; }
+        
+        /* 하트 애니메이션 */
+        .heart { position: fixed; bottom: -20px; pointer-events: none; animation: float linear infinite; opacity: .7; }
+        @keyframes float { from { transform: translateY(0); } to { transform: translateY(-120vh); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>💌 데이트 신청서</h1>
+</header>
+
+<div class="card">
+    <div class="photo-box">
+        <img src="couple.jpeg" class="photo" alt="우리 사진">
+    </div>
+
+    <div id="dplus" class="dplus">❤️ D+</div>
+
+    <div class="music-section">
+        <button class="button music-btn" onclick="toggleMusic()">🎵 우리의 노래 듣기</button>
+        <div id="player" class="player-box">
+            <iframe width="100%" height="240" src="https://www.youtube.com/embed/BNLiso1eH28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="form-title">데이트 신청서 작성 구역</div>
+    
+    <form action="https://formspree.io/f/xjgqkrjr" method="POST">
+        
+        <div class="form-group">
+            <label for="name">👤 이름</label>
+            <input type="text" id="name" name="이름" placeholder="이름을 적어줘!" required>
+        </div>
+
+        <div class="form-group">
+            <label for="relationship">💕 관계</label>
+            <input type="text" id="relationship" name="관계" placeholder="예: 세상에서 제일 예쁜 여자친구" required>
+        </div>
+
+        <div class="form-group">
+            <label for="date">📅 희망 날짜</label>
+            <input type="date" id="date" name="희망날짜" required>
+        </div>
+
+        <div class="form-group">
+            <label for="date-plan">🍕 하고 싶은 데이트</label>
+            <textarea id="date-plan" name="하고싶은데이트" placeholder="먹고 싶은 음식이나 가고 싶은 곳을 편하게 적어줘!" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="extra-request">✨ 추가 요청 사항</label>
+            <textarea id="extra-request" name="추가요청사항" placeholder="영원이한테 바라는 점이나 하고 싶은 말 (선택)"></textarea>
+        </div>
+
+        <input type="hidden" name="_next" value="https://Yongwon.github.io/레포지토리이름/success.html">
+
+        <button type="submit" class="submit-btn">💙 데이트 신청하기</button>
+    </form>
+</div>
+
+<footer>
+    Made with ❤️ by Yongwon
+</footer>
+
+<script>
+    // D+ 계산기
+    const startDate = new Date("2026-04-13");
+    const today = new Date();
+    const diffTime = today - startDate;
+    const diffDays = Math.floor(diffTime / (1000*60*60*24)) + 1;
+    document.getElementById("dplus").innerHTML = "❤️ 우리 만난 지 D+" + diffDays;
+
+    // 유튜브 플레이어 토글
+    function toggleMusic(){
+        const player = document.getElementById("player");
+        player.style.display = (player.style.display === "block") ? "none" : "block";
+    }
+
+    // 배경 하트 효과
+    for(let i=0; i<25; i++){
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random()*100 + "%";
+        heart.style.fontSize = (15 + Math.random()*15) + "px";
+        heart.style.animationDuration = (6 + Math.random()*6) + "s";
+        document.body.appendChild(heart);
+    }
+</script>
+
+</body>
+</html>
